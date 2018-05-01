@@ -31,12 +31,28 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+         it('a feed should contain a valid url', function(){
+            allFeeds.forEach(function(feed) {
+                // contains a url property
+                expect(feed.hasOwnProperty('url')).toBe(true);
+                // url not empty
+                expect(feed.url).not.toBe(null);
+            })
+         });
 
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+         it('a feed should contain a valid name', function(){
+            allFeeds.forEach(function(feed) {
+                // contains a url property
+                expect(feed.hasOwnProperty('name')).toBe(true);
+                // url not empty
+                expect(feed.name).not.toBe(null);
+            })
+         });
     });
 
 
@@ -53,6 +69,19 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+    describe('The menu', function() {
+        it('menu element should be hidden by default', function() {
+            expect($('body').classList()).toContain('menu-hidden');
+        });
+        it('toggle menu element', function() {
+            // click on menu to display navbar
+            $('.menu-icon-link:first').click();
+            expect($('body').classList()).not.toContain('menu-hidden');
+            // click on menu to hide navbar
+            $('.menu-icon-link:first').click();
+            expect($('body').classList()).toContain('menu-hidden');
+        });
+    });
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
@@ -62,6 +91,17 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+    describe('Initial Entries', function() {
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                done()
+            })
+        });
+        it('container should contain one element', function(done) {
+            expect($('.feed .entry').length).not.toBe(0);
+            done()
+        });
+    })
 
     /* TODO: Write a new test suite named "New Feed Selection" */
 
@@ -69,4 +109,18 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+    describe('New Feed Selection', function() {
+        //initial content in .entry
+        var oldContent = $('.entry').text();
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                done()
+            })
+        });
+        it('loadFeed should change content', function(done) {
+            //new content after loadFeed
+            expect($('.entry').text()).not.toEqual(oldContent);
+            done();
+        });
+    })
 }());
