@@ -1,3 +1,14 @@
+// Hello.
+//
+// This is JSHint, a tool that helps to detect errors and potential
+// problems in your JavaScript code.
+//
+// To start, simply enter some JavaScript anywhere on this page. Your
+// report will appear on the right side.
+//
+// Additionally, you can toggle specific options in the Configure
+// menu.
+
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
@@ -37,7 +48,7 @@ $(function() {
                 expect(feed.hasOwnProperty('url')).toBe(true);
                 // url not empty
                 expect(feed.url).not.toBe(null);
-            })
+            });
          });
 
 
@@ -51,7 +62,7 @@ $(function() {
                 expect(feed.hasOwnProperty('name')).toBe(true);
                 // url not empty
                 expect(feed.name).not.toBe(null);
-            })
+            });
          });
     });
 
@@ -94,14 +105,14 @@ $(function() {
     describe('Initial Entries', function() {
         beforeEach(function(done) {
             loadFeed(0, function() {
-                done()
-            })
+                done();
+            });
         });
         it('container should contain one element', function(done) {
             expect($('.feed .entry').length).not.toBe(0);
-            done()
+            done();
         });
-    })
+    });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
 
@@ -114,13 +125,13 @@ $(function() {
         var oldContent = $('.entry').text();
         beforeEach(function(done) {
             loadFeed(0, function() {
-                done()
-            })
+                done();
+            });
         });
         it('loadFeed should change content', function(done) {
             //new content after loadFeed
             expect($('.entry').text()).not.toEqual(oldContent);
             done();
         });
-    })
+    });
 }());
